@@ -1,10 +1,12 @@
 import React from 'react'
-import Login from './components/Login'
+import Body from './components/Body'
+import { Toaster } from 'react-hot-toast'
 
 const App = () => {
   return (
     <>
-      <Login/>
+      <Body/>
+      <Toaster/>
     </>
   )
 }
