@@ -1,4 +1,3 @@
-// LoginRegister/InputField.jsx
 import React from "react";
 
 const InputField = ({
@@ -10,19 +9,19 @@ const InputField = ({
   label,
   required = true,
 }) => (
-  <div className="input-box w-full relative mt-[25px] h-[50px]">
+  <div className="input-box relative mt-6 h-12 md:h-14">
     <input
       name={name}
       value={value}
       onChange={onChange}
-      className="w-full h-full transition-all duration-300 bg-transparent pr-[25px] outline-none text-[16px] border-b-2 border-[#8697c4] font-extrabold peer focus:border-[#7091e6]"
+      className="w-full h-full transition-all duration-300 bg-transparent pr-10 outline-none text-sm md:text-base border-b-2 border-[#8697c4] font-extrabold peer focus:border-[#7091e6]"
       id={name}
       type={type}
       aria-label={label}
       required={required}
     />
     <label
-      className="absolute left-0 transition-all font-bold duration-500 top-[50%] -translate-y-[50%] peer-focus:-top-[5px] peer-focus:text-[#3d52a0] peer-valid:-top-[5px] peer-valid:text-[#3d52a0]"
+      className="absolute left-0 transition-all font-bold duration-500 top-1/2 -translate-y-1/2 peer-focus:-top-1 peer-focus:text-[#3d52a0] peer-valid:-top-1 peer-valid:text-[#3d52a0]"
       htmlFor={name}
     >
       {label}
