@@ -1,70 +1,14 @@
+// LoginRegister/LoginRegister.jsx
 import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import InputField from "./InputField";
+import RoleSelection from "./RoleSelection";
+import { BASE_URL } from "../../utils/constants";
 
-const InputField = ({
-  name,
-  type,
-  value,
-  onChange,
-  icon,
-  label,
-  required = true,
-}) => (
-  <div className="input-box w-full relative mt-[25px] h-[50px]">
-    <input
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="w-full h-full transition-all duration-300 bg-transparent pr-[25px] outline-none text-[16px] border-b-2 border-[#8697c4] font-extrabold peer focus:border-[#7091e6]"
-      id={name}
-      type={type}
-      aria-label={label}
-      required={required}
-    />
-    <label
-      className="absolute left-0 transition-all font-bold duration-500 top-[50%] -translate-y-[50%] peer-focus:-top-[5px] peer-focus:text-[#3d52a0] peer-valid:-top-[5px] peer-valid:text-[#3d52a0]"
-      htmlFor={name}
-    >
-      {label}
-    </label>
-    {icon}
-  </div>
-);
-
-const RoleSelection = ({ role, onChange }) => (
-  <div className="input-box relative mt-[25px] h-[45px] w-1/2">
-    <div className="flex items-center space-x-4">
-      <label className="flex items-center space-x-2">
-        <input
-          type="radio"
-          name="role"
-          value="USER"
-          checked={role === "USER"}
-          onChange={onChange}
-          className="form-radio text-[#7091e6] focus:ring-0 size-4"
-        />
-        <span className="text-[16px] font-extrabold text-[#8697c4]">User</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input
-          type="radio"
-          name="role"
-          value="ADMIN"
-          checked={role === "ADMIN"}
-          onChange={onChange}
-          className="form-radio text-[#7091e6] focus:ring-0 size-4"
-        />
-        <span className="text-[16px] font-extrabold text-[#8697c4]">Admin</span>
-      </label>
-    </div>
-  </div>
-);
-
-const Login = () => {
+const LoginRegister = () => {
   const navigate = useNavigate();
   const [haveAccount, setHaveAccount] = useState(true);
   const [formData, setFormData] = useState({
@@ -87,6 +31,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(formData);
     const { name, email, password, city, role } = formData;
 
     if (haveAccount) {
@@ -239,4 +184,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginRegister;
