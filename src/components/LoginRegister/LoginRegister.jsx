@@ -33,7 +33,21 @@ const LoginRegister = () => {
     event.preventDefault();
     console.log(formData);
     const { name, email, password, city, role } = formData;
+     if (!email || !password) {
+       return toast.error("Please fill in all required fields.");
+     }
 
+     if (!haveAccount && (!name || !city)) {
+       return toast.error("Please fill in all registration fields.");
+     }
+
+     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+       return toast.error("Please enter a valid email.");
+     }
+
+     if (password.length < 6) {
+       return toast.error("Password should be at least 6 characters.");
+     }
     if (haveAccount) {
       try {
         const response = await axios.post(`${BASE_URL}/auth/login`, {
