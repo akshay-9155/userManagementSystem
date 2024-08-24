@@ -146,6 +146,9 @@ const LoginRegister = () => {
 
             <div className="input-box w-full relative mt-[25px] h-[45px]">
               <button
+                style={{
+                  zIndex: 10,
+                }}
                 className="relative bg-transparent text-[#ede8f5] overflow-hidden w-full h-[45px] cursor-pointer rounded-2xl text-[16px] font-extrabold border-2 border-[#7091e6] before:content-[''] before:absolute before:-top-full before:left-0 before:bg-gradient-to-t from-[#25252b] via-[#7091e6] to-[#25252b] before:-z-10 before:h-[300%] before:w-full before:bg-slate-600 hover:before:top-0 before:transition-all duration-500"
                 type="submit"
               >
