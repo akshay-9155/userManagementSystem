@@ -4,8 +4,8 @@ import { Outlet } from "react-router-dom";
 import TestComp from "./TestComp";
 
 const Home = () => {
-  return <div className="font-NewAmsterdam tracking-widest">
-    <TestComp/>
+  return <div className="font-NewAmsterdam tracking-widest cursor-default">
+    {/* <TestComp/> */}
     <Outlet/>
   </div>;
 };

@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const AddUserForm = ({ onClose }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('user');
-  const [password, setPassword] = useState('');
+const UpdateUserForm = ({ user, onClose }) => {
+  const [name, setName] = useState(user.name);
+  const [username, setUsername] = useState(user.username || ""); // Assuming username is optional in the original data
+  const [email, setEmail] = useState(user.email);
+  const [city, setCity] = useState(user.city || ""); // Assuming city is optional in the original data
 
-  const handleAddUser = () => {
-    // Logic to handle user creation
+  const handleUpdateUser = () => {
+    // Logic to handle updating user details
     console.log({
+      id: user.id,
       name,
+      username,
       email,
-      role,
-      password
+      city,
     });
-    onClose(); // Close the form after adding the user
+    onClose(); // Close the form after updating
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-gray-300">Add New User</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-300">Update User</h2>
         <div className="mb-4">
           <label className="block text-gray-400">Name</label>
           <input
@@ -29,6 +30,15 @@ const AddUserForm = ({ onClose }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-400">Username</label>
+          <input
+            type="text"
+            className="w-full px-4 py-2 mt-2 bg-transparent border rounded-lg focus:outline-none text-gray-300"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -42,24 +52,12 @@ const AddUserForm = ({ onClose }) => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-400">Role</label>
-          <select
-            className="w-full px-4 py-2 mt-2 bg-transparent border rounded-lg focus:outline-none text-gray-300"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option className='bg-gray-900' value="user">User</option>
-            <option className='bg-gray-900' value="admin">Admin</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-400">Password</label>
+          <label className="block text-gray-400">City</label>
           <input
-            type="password"
+            type="text"
             className="w-full px-4 py-2 mt-2 bg-transparent border rounded-lg focus:outline-none text-gray-300"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
           />
         </div>
         <div className="flex justify-end space-x-4">
@@ -71,9 +69,9 @@ const AddUserForm = ({ onClose }) => {
           </button>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            onClick={handleAddUser}
+            onClick={handleUpdateUser}
           >
-            Add User
+            Update
           </button>
         </div>
       </div>
@@ -81,4 +79,4 @@ const AddUserForm = ({ onClose }) => {
   );
 };
 
-export default AddUserForm;
+export default UpdateUserForm;

@@ -1,12 +1,13 @@
 // LoginRegister/LoginRegister.jsx
 import React, { useState } from "react";
-import { FaLock, FaUser } from "react-icons/fa";
+import { FaCity, FaLock, FaUser } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import InputField from "./InputField";
 import RoleSelection from "./RoleSelection";
 import { BASE_URL } from "../../utils/constants";
+import { MdAlternateEmail } from "react-icons/md";
 
 const LoginRegister = () => {
   const navigate = useNavigate();
@@ -48,32 +49,34 @@ const LoginRegister = () => {
      if (password.length < 6) {
        return toast.error("Password should be at least 6 characters.");
      }
-    if (haveAccount) {
-      try {
-        const response = await axios.post(`${BASE_URL}/auth/login`, {
-          email,
-          password,
-        });
-        toast.success(response.data.message);
-        if (response.data.success) navigate("/");
-      } catch (error) {
-        toast.error(error?.response?.data?.message || "Internal Server Error");
-      }
-    } else {
-      try {
-        const response = await axios.post(`${BASE_URL}/auth/register`, {
-          name,
-          email,
-          password,
-          city,
-          role,
-        });
-        toast.success(response.data.message);
-        if (response.data.success) handleClick();
-      } catch (error) {
-        toast.error(error?.response?.data?.message || "Internal Server Error");
-      }
-    }
+
+     role === "USER" ? navigate('/userDashboard') : navigate("/adminDashboard")
+    // if (haveAccount) {
+    //   try {
+    //     const response = await axios.post(`${BASE_URL}/auth/login`, {
+    //       email,
+    //       password,
+    //     });
+    //     toast.success(response.data.message);
+    //     if (response.data.success) navigate("/");
+    //   } catch (error) {
+    //     toast.error(error?.response?.data?.message || "Internal Server Error");
+    //   }
+    // } else {
+    //   try {
+    //     const response = await axios.post(`${BASE_URL}/auth/register`, {
+    //       name,
+    //       email,
+    //       password,
+    //       city,
+    //       role,
+    //     });
+    //     toast.success(response.data.message);
+    //     if (response.data.success) handleClick();
+    //   } catch (error) {
+    //     toast.error(error?.response?.data?.message || "Internal Server Error");
+    //   }
+    // }
   };
 
   return (
@@ -104,7 +107,7 @@ const LoginRegister = () => {
                   onChange={handleChange}
                   label="Name"
                   icon={
-                    <FaUser className="absolute top-1/2 right-0 transition-all duration-500 peer-focus:text-[#3e5fd6] peer-valid:text-[#3e5fd6]" />
+                    <FaUser className="absolute top-[35%] right-4 transition-all duration-500 peer-focus:text-[#3e5fd6] peer-valid:text-[#3e5fd6]" />
                   }
                 />
                 <InputField
@@ -114,7 +117,7 @@ const LoginRegister = () => {
                   onChange={handleChange}
                   label="City"
                   icon={
-                    <FaUser className="absolute top-1/2 right-0 transition-all duration-500 peer-focus:text-[#3d52a0] peer-valid:text-[#3d52a0]" />
+                    <FaCity className="absolute top-[35%] right-4 transition-all duration-500 peer-focus:text-[#3d52a0] peer-valid:text-[#3d52a0]" />
                   }
                 />
               </>
@@ -126,7 +129,7 @@ const LoginRegister = () => {
               onChange={handleChange}
               label="Email"
               icon={
-                <FaUser className="absolute top-1/2 right-0 transition-all duration-500 peer-focus:text-[#3d52a0] peer-valid:text-[#3d52a0]" />
+                <MdAlternateEmail className="absolute top-[35%] right-4 transition-all duration-500 peer-focus:text-[#3d52a0] peer-valid:text-[#3d52a0]" />
               }
             />
             <InputField
@@ -136,7 +139,7 @@ const LoginRegister = () => {
               onChange={handleChange}
               label="Password"
               icon={
-                <FaLock className="absolute top-1/2 right-0 transition-all duration-500 peer-focus:text-[#3d52a0] peer-valid:text-[#3d52a0]" />
+                <FaLock className="absolute top-[35%] right-4 transition-all duration-500 peer-focus:text-[#3d52a0] peer-valid:text-[#3d52a0]" />
               }
             />
 
@@ -189,11 +192,12 @@ const LoginRegister = () => {
           } flex justify-center flex-col`}
         >
           <h2 className="text-[40px] leading-[1.3] font-bold font-mono">
-            WELCOME BACK!
+            {haveAccount ? "WELCOME BACK!" : "WELCOME ABOARD!"}
           </h2>
           <p className="text-[16px]">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus,
-            inventore!
+            {haveAccount
+              ? "Access your profile, manage tasks, and continue where you left off."
+              : "Create your profile and start exploring your new workspace."}
           </p>
         </div>
       </div>
